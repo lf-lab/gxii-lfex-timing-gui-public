@@ -1,5 +1,7 @@
 # GXII-LFEX Timing Analysis GUI
 
+**作成者：K.F.F. Law**
+
 このプロジェクトは、X線ストリークカメラデータからGXIIとLFEXの同期タイミングを解析するためのGUIアプリケーションです。
 
 ## 機能

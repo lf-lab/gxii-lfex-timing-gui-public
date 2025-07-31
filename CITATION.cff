@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "GXII-LFEX Timing Analysis GUI"
+version: "1.9.0"
+date-released: "2025-07-31"
+url: "https://github.com/lf-lab/gxii-lfex-timing-gui"
+repository-code: "https://github.com/lf-lab/gxii-lfex-timing-gui"
+abstract: "A GUI application for analyzing synchronization timing between GXII and LFEX from X-ray streak camera data. This tool provides interactive data preview, region setting, peak detection, and timing analysis capabilities with a user-friendly web-based interface."
+authors:
+  - family-names: "Law"
+    given-names: "K.F.F."
+    orcid: "https://orcid.org/0000-0002-5484-8870"  # Please replace with actual ORCID if available
+keywords:
+  - "X-ray streak camera"
+  - "timing analysis"
+  - "GXII"
+  - "LFEX"
+  - "laser synchronization"
+  - "peak detection"
+  - "GUI application"
+  - "Python"
+  - "Streamlit"
+license: MIT
+preferred-citation:
+  type: software
+  title: "GXII-LFEX Timing Analysis GUI"
+  authors:
+    - family-names: "Law"
+      given-names: "K.F.F."
+  version: "1.9.0"
+  date-released: "2025-07-31"
+  url: "https://github.com/lf-lab/gxii-lfex-timing-gui"
