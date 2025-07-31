@@ -6,6 +6,7 @@ version: "1.9.0"
 date-released: "2025-07-31"
 url: "https://github.com/lf-lab/gxii-lfex-timing-gui"
 repository-code: "https://github.com/lf-lab/gxii-lfex-timing-gui"
+doi: "10.5281/zenodo.16629603"
 abstract: "A GUI application for analyzing synchronization timing between GXII and LFEX from X-ray streak camera data. This tool provides interactive data preview, region setting, peak detection, and timing analysis capabilities with a user-friendly web-based interface."
 authors:
   - family-names: "Law"
@@ -31,3 +32,4 @@ preferred-citation:
   version: "1.9.0"
   date-released: "2025-07-31"
   url: "https://github.com/lf-lab/gxii-lfex-timing-gui"
+  doi: "10.5281/zenodo.16629603"

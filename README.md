@@ -2,6 +2,8 @@
 
 **作成者：K.F.F. Law**
 
+[![DOI](https://zenodo.org/badge/1029522898.svg)](https://doi.org/10.5281/zenodo.16629603)
+
 このプロジェクトは、X線ストリークカメラデータからGXIIとLFEXの同期タイミングを解析するためのGUIアプリケーションです。
 
 ## 機能
