@@ -1,0 +1,24 @@
+# GXII-LFEX プリセット設定: 広域
+# 広い測定範囲を使用する実験向け
+
+analysis:
+  gx_region:
+    xmin: 480
+    xmax: 640
+    ymin: 0
+    ymax: 1024
+  lfex_region:
+    xmin: 680
+    xmax: 820
+  processing:
+    noise_threshold: 0.08
+    smoothing_window: 7
+    prominence: 0.08
+    ma_window: 25
+    peak_threshold: 0.08
+
+time_calibration:
+  mode: "全幅指定"
+  full_width_time: 5.0
+  pixel_count: 1024
+  time_per_pixel: 0.00488

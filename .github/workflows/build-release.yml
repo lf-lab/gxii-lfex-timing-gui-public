@@ -1,0 +1,147 @@
+name: Build and Release Distribution Package
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # 手動トリガーを有効化
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    - name: Verify core files exist
+      run: |
+        echo "Checking core files..."
+        test -f gxii_lfex_timing_gui.py || { echo "❌ gxii_lfex_timing_gui.py not found"; exit 1; }
+        test -f requirements.txt || { echo "❌ requirements.txt not found"; exit 1; }
+        test -f README.md || { echo "❌ README.md not found"; exit 1; }
+        echo "✅ All core files present"
+        
+    - name: Make scripts executable
+      run: |
+        chmod +x create_distribution.sh
+        chmod +x start_gui.sh
+        chmod +x start_app.sh
+        
+    - name: Create distribution package
+      run: |
+        echo "🚀 Creating distribution package..."
+        ./create_distribution.sh --deploy
+        
+    - name: Verify package creation
+      run: |
+        VERSION=$(cat VERSION)
+        PACKAGE_NAME="gxii-lfex-timing-gui-v${VERSION}.tar.gz"
+        
+        if [ -f "$PACKAGE_NAME" ]; then
+          echo "✅ Package created successfully: $PACKAGE_NAME"
+          echo "📦 Package size: $(ls -lh "$PACKAGE_NAME" | awk '{print $5}')"
+          echo "📋 Package contents:"
+          tar -tzf "$PACKAGE_NAME" | head -20
+        else
+          echo "❌ Package creation failed"
+          exit 1
+        fi
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: gxii-lfex-timing-gui-distribution
+        path: |
+          gxii-lfex-timing-gui-v*.tar.gz
+          SETUP_GUIDE.md
+        retention-days: 30
+        
+    - name: Create Release (on tag)
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          gxii-lfex-timing-gui-v*.tar.gz
+          SETUP_GUIDE.md
+        body: |
+          ## GXII-LFEX Timing Analysis GUI Release
+          
+          ### 🚀 クイックスタート
+          1. `gxii-lfex-timing-gui-v*.tar.gz` をダウンロード
+          2. `tar -xzf gxii-lfex-timing-gui-v*.tar.gz` で展開
+          3. `cd gxii-lfex-timing-gui-v*` でディレクトリに移動
+          4. `./start_gui.sh` でGUIを起動
+          5. ブラウザで http://localhost:8501 にアクセス
+          
+          ### 📋 含まれるファイル
+          - GUI アプリケーション本体
+          - Python依存関係リスト
+          - 起動スクリプト（Mac/Linux/Windows完全対応）
+          - 詳細ドキュメント
+          
+          ### 🔧 システム要件
+          - Python 3.8以上
+          - 2GB以上の空きメモリ
+          - ウェブブラウザ
+          
+          詳細な設定手順は同梱の `SETUP_GUIDE.md` を参照してください。
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+  test-distribution:
+    runs-on: ubuntu-latest
+    needs: build-and-release
+    
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: gxii-lfex-timing-gui-distribution
+        
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Test package extraction and basic setup
+      run: |
+        echo "🧪 Testing distribution package..."
+        
+        # Find the package file
+        PACKAGE=$(ls gxii-lfex-timing-gui-v*.tar.gz | head -1)
+        echo "Testing package: $PACKAGE"
+        
+        # Extract package
+        tar -xzf "$PACKAGE"
+        EXTRACT_DIR=$(basename "$PACKAGE" .tar.gz)
+        cd "$EXTRACT_DIR"
+        
+        # Verify critical files
+        test -f gxii_lfex_timing_gui.py || { echo "❌ Main app missing"; exit 1; }
+        test -f requirements.txt || { echo "❌ Requirements missing"; exit 1; }
+        test -f start_gui.sh || { echo "❌ Start script missing"; exit 1; }
+        
+        echo "✅ Package extraction and verification successful"
+        
+        # Test Python environment setup (without GUI startup)
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+        echo "✅ Python dependencies installed successfully"
+        
+        # Syntax check of main application
+        python -m py_compile gxii_lfex_timing_gui.py
+        
+        echo "✅ Main application syntax check passed"

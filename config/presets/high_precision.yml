@@ -1,0 +1,24 @@
+# GXII-LFEX プリセット設定: 高精度
+# 精密測定に適した設定（狭い範囲、高い感度）
+
+analysis:
+  gx_region:
+    xmin: 540
+    xmax: 580
+    ymin: 100
+    ymax: 900
+  lfex_region:
+    xmin: 720
+    xmax: 780
+  processing:
+    noise_threshold: 0.12
+    smoothing_window: 3
+    prominence: 0.12
+    ma_window: 15
+    peak_threshold: 0.12
+
+time_calibration:
+  mode: "1pixel指定"
+  full_width_time: 4.8
+  pixel_count: 1024
+  time_per_pixel: 0.004

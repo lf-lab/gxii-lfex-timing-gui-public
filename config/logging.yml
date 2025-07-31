@@ -1,0 +1,162 @@
+# GXII-LFEX Timing Analysis GUI - ログ設定
+# Phase 3: Logger Integration
+# Version: 1.4.0
+
+logging:
+  # ログレベル設定
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  
+  # ログ出力フォーマット
+  format: "[%(asctime)s] %(levelname)-8s - %(name)s: %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  
+  # ハンドラー設定
+  handlers:
+    # コンソール出力
+    console:
+      enabled: true
+      level: "INFO"
+      use_colors: true
+    
+    # ファイル出力
+    file:
+      enabled: true
+      level: "DEBUG"
+      filepath: "logs/app.log"
+      max_size: "10MB"
+      backup_count: 5
+      encoding: "utf-8"
+    
+    # エラー専用ファイル
+    error_file:
+      enabled: true
+      level: "ERROR"
+      filepath: "logs/error.log"
+      max_size: "5MB"
+      backup_count: 3
+      encoding: "utf-8"
+    
+    # GUI表示用
+    gui:
+      enabled: true
+      level: "INFO"
+      max_lines: 1000
+      auto_scroll: true
+
+# モジュール別ログレベル設定
+loggers:
+  # コアモジュール
+  "src.core.timing_analyzer":
+    level: "INFO"
+    handlers: ["console", "file"]
+  
+  "src.core.data_loader":
+    level: "INFO"
+    handlers: ["console", "file"]
+  
+  # GUI関連
+  "src.gui.app":
+    level: "INFO"
+    handlers: ["console", "file", "gui"]
+  
+  # 設定管理
+  "src.config.config_manager":
+    level: "DEBUG"
+    handlers: ["console", "file"]
+  
+  # ユーティリティ
+  "src.utils":
+    level: "DEBUG"
+    handlers: ["file"]
+
+# ログローテーション設定
+rotation:
+  # 日次ローテーション
+  daily:
+    enabled: false
+    hour: 0  # 0時にローテーション
+    backup_count: 30
+  
+  # サイズベースローテーション（デフォルト）
+  size_based:
+    enabled: true
+    max_size: "10MB"
+    backup_count: 5
+
+# ログアーカイブ設定
+archive:
+  enabled: true
+  compress: true  # gzip圧縮
+  max_age_days: 30  # 30日後に削除
+  archive_format: "logs/archive/{date}/app_{date}.log.gz"
+
+# デバッグ設定
+debug:
+  # デバッグモード
+  enabled: false
+  
+  # パフォーマンス測定
+  performance_logging: false
+  
+  # メモリ使用量ログ
+  memory_logging: false
+  
+  # SQL クエリログ（将来用）
+  sql_logging: false
+
+# GUI統合設定
+gui_integration:
+  # ログパネル表示設定
+  show_log_panel: true
+  default_panel_height: 300
+  
+  # リアルタイム更新
+  real_time_update: true
+  update_interval_ms: 1000
+  
+  # ログレベルフィルター
+  level_filter_options:
+    - "ALL"
+    - "DEBUG"
+    - "INFO"
+    - "WARNING"
+    - "ERROR"
+    - "CRITICAL"
+  
+  # 表示カラム
+  display_columns:
+    - "timestamp"
+    - "level"
+    - "module"
+    - "message"
+  
+  # ログエクスポート
+  export_formats:
+    - "json"
+    - "csv"
+    - "txt"
+
+# アラート設定
+alerts:
+  # エラーアラート
+  error_alerts:
+    enabled: false
+    email_notifications: false
+    desktop_notifications: false
+  
+  # パフォーマンスアラート
+  performance_alerts:
+    enabled: false
+    memory_threshold_mb: 500
+    cpu_threshold_percent: 80
+
+# 開発者設定
+development:
+  # デバッグ用追加ログ
+  verbose_imports: false
+  log_function_calls: false
+  log_performance_metrics: false
+  
+  # テスト用設定
+  test_mode_logging: false
+  mock_handlers: false

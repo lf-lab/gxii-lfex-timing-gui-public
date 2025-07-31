@@ -1,0 +1,41 @@
+# GXII-LFEX Timing Analysis GUI - 公開版用 .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 仮想環境
+venv/
+env/
+ENV/
+.venv/
+
+# ログファイル
+*.log
+logs/
+
+# 実行時生成ファイル
+output/
+*.png
+*.jpg
+
+# OS固有ファイル
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ユーザー設定
+config/user.yml
+config/local_*
+
+# テスト関連
+.pytest_cache/
+.coverage

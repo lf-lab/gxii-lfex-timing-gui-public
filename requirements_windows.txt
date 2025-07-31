@@ -1,0 +1,22 @@
+# GXII-LFEX Timing Analysis GUI - Windows-specific Package Requirements
+# v1.6.2 - Windows NumPy Compatibility Hotfix
+
+# Windows-optimized packages with pre-compiled wheels
+streamlit>=1.28.0,<2.0.0
+numpy>=1.21.0,<2.0.0  # Will use pre-compiled wheels when available
+matplotlib>=3.5.0,<4.0.0
+scipy>=1.7.0,<2.0.0
+pandas>=1.3.0,<3.0.0
+
+# Supporting packages
+pyarrow>=7.0.0,<25.0.0
+PyYAML>=6.0.0,<7.0.0
+
+# Windows-specific installation notes:
+# 1. Use --only-binary=numpy to force wheel installation
+# 2. Try --force-reinstall for persistent issues
+# 3. Consider conda for complex scientific package dependencies
+
+# Alternative wheels (uncomment if standard installation fails):
+# --find-links https://download.pytorch.org/whl/torch_stable.html
+# --trusted-host download.pytorch.org

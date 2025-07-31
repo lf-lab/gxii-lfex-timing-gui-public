@@ -1,0 +1,58 @@
+# Git関連
+.git
+.gitignore
+
+# Python関連
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE関連
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS関連
+.DS_Store
+Thumbs.db
+
+# 開発・デバッグファイル
+debug/
+test/
+tests/
+
+# ログファイル
+*.log
+
+# 一時ファイル
+*.tmp
+*.temp
+
+# データファイル（大容量の可能性があるため）
+*.txt
+*.csv
+*.dat
+data/
+
+# 出力ファイル
+output/
+img/
+*.jpg
+*.png
+
+# ドキュメント（READMEは除く）
+*.md
+!README.md
