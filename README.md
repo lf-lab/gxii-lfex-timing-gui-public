@@ -22,15 +22,9 @@
 
 ### 簡単スタート（推奨）
 
-1.  **統一スタートアップスクリプトを実行**:
+1.  **スタートアップスクリプトを実行**:
     ```bash
     # Mac/Linux
-    ./start_app.sh
-
-    # Windows (Command Prompt)
-    start_app.bat
-
-    # Windows (PowerShell/Git Bash)
     ./start_app.sh
     ```
 
@@ -52,11 +46,6 @@
 ./start_app.sh --cleanup          # 統合クリーンアップ（推奨）
 ./start_app.sh --status           # 詳細な状態確認
 ./cleanup_processes.sh            # 専用クリーンアップスクリプト
-
-# Windows
-start_app.bat --cleanup           # 統合クリーンアップ（推奨）
-start_app.bat --status            # 詳細な状態確認
-cleanup_processes.bat             # 専用クリーンアップスクリプト
 ```
 
 **自動機能**:
@@ -83,8 +72,6 @@ cleanup_processes.bat             # 専用クリーンアップスクリプト
 
     # 仮想環境をアクティベート
     source venv/bin/activate  # Mac/Linux
-    # または
-    venv\Scripts\activate     # Windows
 
     # 必要なパッケージをインストール
     pip install -r requirements.txt
@@ -100,11 +87,7 @@ cleanup_processes.bat             # 専用クリーンアップスクリプト
 **最も簡単な方法**:
 ```bash
 ./start_app.sh  # Mac/Linux
-start_app.bat   # Windows
 ```
-
-**Windows ユーザー向け注意事項**:
-Windows環境でのセットアップや実行には、追加の考慮事項が必要な場合があります。詳細は `GETTING_STARTED_WINDOWS.md` を参照してください。
 
 **手動起動**:
 ```bash
@@ -256,8 +239,6 @@ time,amplitude
 LFEXTiming/
 ├── main.py                          # メインのGUIアプリケーション
 ├── start_app.sh                     # 統一起動スクリプト (Mac/Linux)
-├── start_app.bat                    # 統一起動スクリプト (Windows)
-├── cleanup_processes.bat            # Windows用プロセス管理スクリプト
 ├── requirements.txt                 # Python依存関係
 ├── README.md                        # このファイル
 ├── venv/                            # Python仮想環境
